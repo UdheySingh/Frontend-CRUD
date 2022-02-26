@@ -43,18 +43,18 @@ var data =
     
     }
 ];
+
+//variabili
+var u;
+var id;
 var nextId = 10006;
 var btnElimina = "<button class='btn btn-danger elimina'>Elimina</button>";
 var btnModifica = "<button class='btn btn-danger Modifica'>Modifica</button>";
 
 $(document).ready(function()
 {
-    displayTable(),
-    configuraAggiungi(),
-    elimina()
+    displayTable()
 });
-
-var u;
 
 function displayTable() 
 {
@@ -69,31 +69,38 @@ function displayTable()
         u += '</tr>';
     });
     $("#contenutoTabella").html(u);
-
-}
-
-function configuraAggiungi() {
+    
+    //aggiungi
     $("#aggiungi").click(function () 
     {
         var nome = prompt('Nome');
-        var congnome = prompt('Cognome');
-        console.log(nome, congnome);
+        var cognome = prompt('Cognome');
+        console.log(nome, cognome);
         var n = {
             "id": nextId,
             "firstName": nome,
-            "lastName": congnome,
+            "lastName": cognome,
             "gender": "M",
         };
         data.push(n);
         displayTable();
         nextId++;
     });
-}
 
-function elimina() 
-{
-    $(".elimina").click(function () 
-    {
+    //elimina
+    $(".elimina").click(function () {
         $(this).parents("tr").fadeOut("fast");
+
+        var id = $(this).parent().data("id");
+
+        for (var i = 0; i < data.length; i++) {
+            if (id == data[i].id) {
+                data.splice(i, 1);
+            }
+        }
     });
+
+    //modifica
+
+
 }
